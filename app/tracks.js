@@ -15,30 +15,8 @@ router.get('/', (req, res) => {
         Track.find()
             .then(tracks => {
                 res.send(tracks)
-                    .catch(() => res.sendStatus(500))
-            })
+            }).catch(() => res.sendStatus(500))
     }
 });
-
-router.get('/:id', (req, res) => {
-    Track.findById(req.params.id)
-        .then(result => {
-            if (result) return res.send(result);
-            res.sendStatus(404)
-        })
-        .catch(() => res.sendStatus(500));
-});
-
-router.post('/', (req, res) => {
-    const trackData = req.body;
-
-    const track = new Track(trackData);
-    track.save()
-        .then(result => res.send(result))
-        .catch(error => res.sendStatus(400).send(error));
-});
-
-
-
 
 module.exports = router;

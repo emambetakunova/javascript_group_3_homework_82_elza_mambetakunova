@@ -30,11 +30,12 @@ router.get('/', (req, res) => {
         Album.find()
             .then(albums => {
                 res.send(albums)
-                    .catch(() => res.sendStatus(500))
-            })
+            }).catch(() => res.sendStatus(500))
+
     }
 
 });
+
 
 router.get('/:id', (req, res) => {
     Album.findById(req.params.id).populate('artist')
@@ -45,15 +46,16 @@ router.get('/:id', (req, res) => {
         .catch(() => res.sendStatus(500));
 });
 
+
 router.post('/', upload.single('image'), (req, res) => {
     const albumData = req.body;
     if (req.file) {
         albumData.image = req.file.filename;
     }
-    const album = new Album(albumData);
-    album.save()
+    const newAlbum = new Album(albumData);
+    newAlbum.save()
         .then(result => res.send(result))
-        .catch(error => res.sendStatus(400).send(error));
+        .catch(error => res.send(error));
 });
 
 

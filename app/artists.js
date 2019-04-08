@@ -20,8 +20,9 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     Artist.find()
-        .then(artists => res.send(artists))
-        .catch(() => res.sendStatus(500))
+        .then(albums => {
+            res.send(albums)
+        }).catch(() => res.sendStatus(500))
 });
 
 router.post('/', upload.single('image'), (req, res) => {
