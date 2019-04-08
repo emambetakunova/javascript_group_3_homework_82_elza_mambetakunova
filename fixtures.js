@@ -17,37 +17,50 @@ const run = async () => {
         await collection.drop();
     }
 
-    const artist = new Artist.create(
-        {name: 'Adele', description: 'Adele Laurie Blue Adkins'},
-        {name: 'Michael Jackson', description: 'Michael Joseph Jackson'}
+    const artist = await Artist.create(
+        {
+            name: 'Adele',
+            description: 'Adele Laurie Blue Adkins',
+            image: 'adele.jpg'
+        },
+        {
+            name: 'Michael Jackson',
+            description: 'Michael Joseph Jackson',
+            image: 'michael.jpg'
+        }
     );
 
-    const album = new Album.create(
-        {title: 'Adele 21', release: 2011, artist: artist[0]._id, image: ''},
-        {title: 'Thriller', release: 1982, artist: artist[1]._id, image: ''}
+    const album = await Album.create(
+        {
+            title: 'Adele 21',
+            release: 2011,
+            artist: artist[0]._id,
+            image: 'adele21.jpg'
+        },
+        {
+            title: 'Thriller',
+            release: 1982,
+            artist: artist[1]._id,
+            image: 'thriller.jpg'
+        }
     );
 
-    // const track = new Track.create(
-    //     {title: 'Rolling in the Deep', length: 3, album: album[0]._id, image: ''},
-    //     {title: 'Billie Jean', length: 4, album: album[1]._id, image: ''}
-    // );
-
-
-
-    await Track.create(
+    const track = await Track.create(
         {
             title: 'Rolling in the Deep',
             length: 3,
-            album: album[0]._id,
-            image: ''
+            album: album[0]._id
         },
         {
             title: 'Billie Jean',
             length: 4,
-            album: album[1]._id,
-            image: ''
+            album: album[1]._id
         }
-    )
+    );
+
+
+
+    await connection.close();
 
 };
 
