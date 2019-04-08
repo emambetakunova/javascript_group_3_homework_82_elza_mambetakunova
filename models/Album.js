@@ -7,7 +7,7 @@ const AlbumSchema = new Schema({
         type: String, required: true
     },
     release: {
-        type: Number, required: true
+        type: String, required: true
     },
     image: String,
     artist: {
